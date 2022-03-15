@@ -1,0 +1,37 @@
+services:
+
+  database:
+    container_name: database
+    build:
+      context: ./infra/postgres
+
+  nginx:
+    container_name: nginx
+    buld:
+      context: ./infra/nginx
+    volumes:
+      - ./infra/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8000:80"
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      target: development
+    depends_on:
+      - database
+    volumes:
+      - ./backend:/app/
+    ports:
+      - "8000:8000"
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      target: development
+    depends_on:
+      - backend
+    ports:
+      - "8001:8001"
