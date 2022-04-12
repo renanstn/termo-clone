@@ -9,7 +9,8 @@ python = "^3.9"
 fastapi = "^0.75.0"
 uvicorn = "^0.17.6"
 peewee = "^3.14.10"
-psycopg-binary = "^3.0.10"
+python-decouple = "^3.6"
+psycopg2-binary = "^2.9.3"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
