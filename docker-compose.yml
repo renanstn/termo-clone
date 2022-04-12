@@ -5,6 +5,11 @@ services:
     build:
       context: ./infra/postgres
 
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
   nginx:
     container_name: nginx
     build:
