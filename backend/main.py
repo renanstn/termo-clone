@@ -1,4 +1,3 @@
-from urllib import response
 from fastapi import FastAPI
 
 from models import Guess, Word
