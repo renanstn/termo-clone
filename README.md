@@ -10,9 +10,9 @@ e estudo.
 
 ## MVP
 
-- [ ] Possibilitar a inserção da palavra do dia
-- [ ] Possibilitar receber sugestões de palavras via API
-- [ ] Validar e retornar as sugestões
+- [x] Possibilitar a inserção da palavra do dia
+- [x] Possibilitar receber sugestões de palavras via API
+- [x] Validar e retornar as sugestões
 
 ## Melhorias
 
