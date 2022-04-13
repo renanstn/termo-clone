@@ -38,5 +38,7 @@ services:
       target: development
     depends_on:
       - backend
+    volumes:
+      - ./frontend:/app/
     ports:
       - "8001:8001"
