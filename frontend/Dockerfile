@@ -11,7 +11,6 @@ COPY package*.json ./
 # =============================================================================
 FROM base AS development
 RUN npm install --include=dev
-RUN npm install -g @vue/cli
 COPY . .
 CMD ["npm", "run", "serve"]
 
