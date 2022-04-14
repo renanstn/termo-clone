@@ -41,4 +41,4 @@ services:
     volumes:
       - ./frontend:/app/
     ports:
-      - "8001:8001"
+      - "8080:8080"
