@@ -1,19 +1,22 @@
 # =============================================================================
 # Base
 # =============================================================================
-FROM node:16 AS base
+FROM node:lts-alpine AS base
+RUN npm install -g http-server
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
+# ENV PATH /app/node_modules/.bin:$PATH
 COPY package*.json ./
 
 # =============================================================================
 # Development
 # =============================================================================
 FROM base AS development
-RUN npm install --include=dev
-RUN npm install -g @vue/cli
+RUN npm install
 COPY . .
-CMD ["npm", "run", "serve"]
+RUN npm run build
+EXPOSE 8080
+#CMD ["npm", "run", "serve"]
+CMD [ "http-server", "dist" ]
 
 # =============================================================================
 # Production
@@ -21,4 +24,7 @@ CMD ["npm", "run", "serve"]
 FROM base AS production
 RUN npm install
 COPY . .
-CMD ["npm", "run", "serve"]
+RUN npm run build
+EXPOSE 8080
+# CMD ["npm", "run", "serve"]
+CMD [ "http-server", "dist" ]
