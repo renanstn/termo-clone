@@ -29,17 +29,21 @@ import TopMenu from '@/components/TopMenu.vue'
 
 export default {
   name: 'App',
+
   components: {
     TopMenu
   },
+
   data() {
     return {
       word_leters: 0,
     }
   },
+
   created() {
     this.get_number_of_letters()
   },
+
   methods: {
     get_number_of_letters() {
       const url = "http://localhost:8000/letter_count"
