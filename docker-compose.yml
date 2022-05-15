@@ -29,7 +29,7 @@ services:
     volumes:
       - ./backend:/app/
     ports:
-      - "8000:8000"
+      - "8001:8001"
 
   frontend:
     container_name: frontend
@@ -41,4 +41,4 @@ services:
     volumes:
       - ./frontend:/app/
     ports:
-      - "8080:8080"
+      - "8002:8002"
