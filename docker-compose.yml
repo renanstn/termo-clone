@@ -1,7 +1,7 @@
 services:
 
-  database:
-    container_name: database
+  db:
+    container_name: db
     build:
       context: ./infra/postgres
 
@@ -25,7 +25,7 @@ services:
       context: ./backend
       target: development
     depends_on:
-      - database
+      - db
     volumes:
       - ./backend:/app/
     ports:
