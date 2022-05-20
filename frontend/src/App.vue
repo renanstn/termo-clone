@@ -46,12 +46,16 @@ export default {
 
   methods: {
     get_number_of_letters() {
-      const url = "http://localhost:8000/letter_count"
+      const url = "http://localhost/api/letter_count"
       axios.get(url)
       .then((response) => {
         console.log(response.data)
         this.word_leters = response.data.letters
       })
+    },
+
+    check_word() {
+      console.log("checking...")
     }
   },
 }

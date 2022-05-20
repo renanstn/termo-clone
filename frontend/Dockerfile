@@ -13,7 +13,7 @@ FROM base AS development
 RUN npm install
 COPY . .
 RUN npm run build
-CMD ["npm", "run", "serve", "--", "--port", "8002"]
+CMD [ "npm", "run", "serve", "--", "--port", "8002" ]
 # CMD [ "http-server", "dist" ]
 
 # =============================================================================
@@ -23,5 +23,5 @@ FROM base AS production
 RUN npm install
 COPY . .
 RUN npm run build
-CMD ["npm", "run", "serve"]
+CMD [ "npm", "run", "serve" ]
 # CMD [ "http-server", "dist" ]
