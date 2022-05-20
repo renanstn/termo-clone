@@ -23,7 +23,7 @@ def read_root():
 
 
 @app.get("/letter_count")
-def letter_cont():
+def letter_count():
     query = Word.get()
     secret_word = query.word
     return {"letters": len(secret_word)}
