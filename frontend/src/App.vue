@@ -11,11 +11,19 @@
             <h5 class="card-title">Palavra do dia:</h5>
             <div class="row">
               <div class="col" v-for="letter in word_leters" :key="letter">
-                <input class="form-control" type="text" :name="letter">
+                <input
+                  class="form-control"
+                  type="text"
+                  :name="letter"
+                  ref="letters"
+                  maxlength="1"
+                  @input="next_input(letter)"
+                >
               </div>
             </div>
             <br>
             <a href="#" class="btn btn-primary">Enviar</a>
+            <a href="#" class="btn btn-secondary">Limpar</a>
           </div>
         </div>
       </div>
@@ -46,7 +54,7 @@ export default {
 
   methods: {
     get_number_of_letters() {
-      const url = "http://localhost/api/letter_count"
+      const url = `${process.env.VUE_APP_API_URL}/letter_count`
       axios.get(url)
       .then((response) => {
         console.log(response.data)
@@ -54,8 +62,14 @@ export default {
       })
     },
 
+    next_input(position) {
+      if (position < this.word_leters) {
+        this.$refs.letters[position].focus()
+      }
+    },
+
     check_word() {
-      console.log("checking...")
+      console.log("send");
     }
   },
 }
