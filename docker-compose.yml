@@ -24,6 +24,7 @@ services:
     build:
       context: ./backend
       target: development
+      # target: production
     depends_on:
       - db
     volumes:
@@ -36,6 +37,7 @@ services:
     build:
       context: ./frontend
       target: development
+      # target: production
     depends_on:
       - backend
     volumes:
