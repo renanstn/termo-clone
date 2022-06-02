@@ -8,7 +8,16 @@
       <div class="col">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Palavra do dia:</h5>
+            <h5 class="card-title">Tentativas: {{ attempts }}</h5>
+
+            <div class="row mb-3" v-for="attempt in results" :key="attempt">
+              <div class="col" v-for="item in attempt" :key="item">
+                <button v-if="item.result==1" type="button" class="btn btn-success">{{ item.letter }}</button>
+                <button v-else-if="item.result==2" type="button" class="btn btn-warning">{{ item.letter }}</button>
+                <button v-else-if="item.result==0" type="button" class="btn btn-dark">{{ item.letter }}</button>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col" v-for="letter in word_leters" :key="letter">
                 <input
@@ -17,19 +26,28 @@
                   :name="letter"
                   ref="letters"
                   maxlength="1"
+                  v-model="guess[letter]"
                   @input="next_input(letter)"
                 >
               </div>
             </div>
+
             <br>
-            <a href="#" class="btn btn-primary">Enviar</a>
-            <a href="#" class="btn btn-secondary">Limpar</a>
+
+            <div class="row">
+              <div class="col">
+                <a href="#" class="btn btn-primary" @click.prevent="check_word">Enviar</a>
+                <a href="#" class="btn btn-secondary">Limpar</a>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios'
@@ -45,6 +63,9 @@ export default {
   data() {
     return {
       word_leters: 0,
+      attempts: 0,
+      guess: [],
+      results: [],
     }
   },
 
@@ -69,7 +90,18 @@ export default {
     },
 
     check_word() {
-      console.log("send");
+      const url = `${process.env.VUE_APP_API_URL}/check/`
+      const payload = {
+        word: this.guess.join(''),
+        player: "test",
+        attempt: this.attempts,
+      }
+
+      axios.post(url, payload)
+      .then((response) => {
+        this.results.push(response.data.result)
+        this.attempts = response.data.attempt
+      })
     }
   },
 }
