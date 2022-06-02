@@ -12,6 +12,7 @@ class Guess(BaseModel):
 
     word: str
     player: str
+    attempt: int
 
 
 class Word(peewee.Model):

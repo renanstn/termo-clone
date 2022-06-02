@@ -40,11 +40,13 @@ def check_guess(guess: Guess):
         return {"message": "wrong number of letters"}
 
     for guess_letter, correct_letter in zip(guess_word, secret_word):
+        result = None
         if guess_letter == correct_letter:
-            response.append(1)
+            result = 1
         elif guess_letter in secret_word:
-            response.append(2)
+            result = 2
         else:
-            response.append(0)
+            result = 0
+        response.append({"letter": guess_letter, "result": result})
 
-    return {"result": response}
+    return {"result": response, "attempt": guess.attempt+1}
