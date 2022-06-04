@@ -10,6 +10,7 @@
           <div class="card-body">
             <h5 class="card-title">Tentativas: {{ attempts }}</h5>
 
+            <!-- Results session -->
             <div class="row mb-3" v-for="attempt in results" :key="attempt">
               <div class="col" v-for="item in attempt" :key="item">
                 <button v-if="item.result==1" type="button" class="btn btn-success">{{ item.letter }}</button>
@@ -18,6 +19,9 @@
               </div>
             </div>
 
+            <hr>
+
+            <!-- Guess session -->
             <div class="row">
               <div class="col" v-for="letter in word_leters" :key="letter">
                 <input
@@ -32,12 +36,13 @@
               </div>
             </div>
 
-            <br>
+            <hr>
 
+            <!-- Actions -->
             <div class="row">
               <div class="col">
                 <a href="#" class="btn btn-primary" @click.prevent="check_word">Enviar</a>
-                <a href="#" class="btn btn-secondary">Limpar</a>
+                <a href="#" class="btn btn-secondary" @click.prevent="clear_guess">Limpar</a>
               </div>
             </div>
 
@@ -78,9 +83,12 @@ export default {
       const url = `${process.env.VUE_APP_API_URL}/letter_count`
       axios.get(url)
       .then((response) => {
-        console.log(response.data)
         this.word_leters = response.data.letters
       })
+    },
+
+    focus_first_letter() {
+      this.$refs.letters[0].focus()
     },
 
     next_input(position) {
@@ -102,7 +110,16 @@ export default {
         this.results.push(response.data.result)
         this.attempts = response.data.attempt
       })
-    }
+      .finally(() => {
+        this.clear_guess()
+        this.focus_first_letter()
+      })
+    },
+
+    clear_guess() {
+      this.guess = []
+      this.focus_first_letter()
+    },
   },
 }
 </script>
