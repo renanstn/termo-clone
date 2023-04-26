@@ -2,8 +2,6 @@ name: Lint Dockerfile
 
 on:
   push:
-    paths:
-      - 'Dockerfile'
 
 jobs:
   lint-backend:
